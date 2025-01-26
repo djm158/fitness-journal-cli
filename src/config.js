@@ -5,6 +5,8 @@ const homeDir = os.homedir();
 
 const defaultConfigPath = path.resolve(homeDir, ".local/share/fitness-journal");
 
+const DEFAULT_CONFIG_FILE = "config.json";
+
 const defaultConfig = {
   journalPath: path.resolve(homeDir, ".local/share/fitness-journal"),
   journalExtension: ".md",
