@@ -3,14 +3,19 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "cli.js",
+  "main": "src/cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/cli.js",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@inquirer/prompts": "^7.2.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2"
   }
 }
