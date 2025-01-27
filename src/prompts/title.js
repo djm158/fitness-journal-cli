@@ -1,6 +1,9 @@
 import { input } from "@inquirer/prompts";
 
-export const getTitle = async () => {
+export const getTitle = async (options) => {
+  if (options.title) {
+    return options.title;
+  }
   return await input({
     message: "Title?",
     default: new Date()

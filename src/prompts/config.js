@@ -1,9 +1,10 @@
 import { input } from "@inquirer/prompts";
 import fs from "fs/promises";
+import path from "path";
 
 import {
   defaultConfig,
-  defaultConfigPath,
+  DEFAULT_CONFIG_PATH,
   DEFAULT_CONFIG_FILE,
 } from "../config.js";
 
@@ -32,14 +33,14 @@ export const promptForConfig = async () => {
 
 export const checkForConfig = async () => {
   const hasConfigFile = await fs
-    .access(path.resolve(defaultConfigPath, DEFAULT_CONFIG_FILE))
+    .access(path.resolve(DEFAULT_CONFIG_PATH, DEFAULT_CONFIG_FILE))
     .then(() => true)
     .catch(() => false);
 
   let config = defaultConfig;
 
   if (!hasConfigFile) {
-    console.log("No config file found, creating one at ", defaultConfigPath);
+    console.log("No config file found, creating one at ", DEFAULT_CONFIG_PATH);
 
     const { journalPath, journalExtension, workoutOptions } =
       await promptForConfig();
@@ -50,9 +51,9 @@ export const checkForConfig = async () => {
       workoutOptions,
     };
 
-    await fs.mkdir(defaultConfigPath, { recursive: true });
+    await fs.mkdir(DEFAULT_CONFIG_PATH, { recursive: true });
     await fs.writeFile(
-      path.resolve(defaultConfigPath, DEFAULT_CONFIG_FILE),
+      path.resolve(DEFAULT_CONFIG_PATH, DEFAULT_CONFIG_FILE),
       JSON.stringify(config, null, 2),
     );
   }

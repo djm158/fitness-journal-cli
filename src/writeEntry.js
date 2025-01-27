@@ -1,17 +1,18 @@
 import fs from "fs/promises";
 import path from "path";
+import { defaultConfig } from "./config.js";
 
-export const writeEntry = async (config, output) => {
+export const writeEntry = async ({ title, workouts }) => {
   await fs.appendFile(
     // TODO: extract journal as constant
     path.resolve(
-      config.appendFilejournalPath,
-      `journal${config.journalExtension}`,
+      defaultConfig.journalPath,
+      `journal${defaultConfig.journalExtension}`,
     ),
-    `\n\n# ${title}\n\n${Object.keys(output.workouts)
+    `\n\n# ${title}\n\n${Object.keys(workouts)
       .map(
-        (w) =>
-          `### ${w}\n\nDistance: ${output.workouts[w].distance}\n\nDetails: ${output.workouts[w].details}`,
+        (workout) =>
+          `### ${workout}\n\nDistance: ${workouts[workout].distance}\n\nDetails: ${workouts[workout].details}`,
       )
       .join("\n")}`,
   );

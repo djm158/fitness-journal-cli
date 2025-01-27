@@ -1,41 +1,34 @@
-import { checkbox } from "@inquirer/prompts";
-import fs from "fs/promises";
-import path from "path";
 import { checkForConfig } from "./prompts/config.js";
-import { defaultConfig, defaultConfigPath } from "./config.js";
 import { writeEntry } from "./writeEntry.js";
 
 import { getTitle } from "./prompts/title.js";
-import { program } from "commander";
+import { Command, Option } from "commander";
+import { getWorkouts } from "./prompts/workouts.js";
+import { defaultConfig } from "./config.js";
 
-const output = {
-  title,
-  workouts: {},
-};
+const program = new Command();
 
 program
   .command("add", { isDefault: true })
   .description("Add a new entry")
-  .action(async () => {
+  .option("-t, --title <title>", "Title of the entry")
+  .addOption(
+    // TODO: maybe this should be variadic
+    new Option("-w, --workout <workout>", "Workout to add").choices(
+      defaultConfig.workoutOptions,
+    ),
+  )
+  .option("-d, --details <details>", "Details of the workout")
+  .option("-D, --distance <distance>", "Distance of the workout")
+  .action(async (options) => {
+    // TODO: check to see if https://github.com/tj/commander.js?tab=readme-ov-file#life-cycle-hooks can be used to run this before the action
     await checkForConfig();
-
     // TODO: check if entry already exists
+    const title = await getTitle(options);
+    const workouts = await getWorkouts(options);
 
-    const title = await getTitle();
-
-    const workouts = await checkbox({
-      message: "Workout type?",
-      choices: defaultConfig.workoutOptions,
-    });
-
-    for (const workoutType of workouts) {
-      if (promptsFor[workoutType]) {
-        output.workouts[workoutType] =
-          await promptsFor[workoutType](workoutType);
-      }
-    }
+    console.log(workouts);
+    await writeEntry({ title, workouts });
   });
 
-console.log(output);
-
-await writeEntry(config.journalPath, config, output);
+await program.parseAsync(process.argv);

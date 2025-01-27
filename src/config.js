@@ -3,14 +3,17 @@ import path from "path";
 
 const homeDir = os.homedir();
 
-const defaultConfigPath = path.resolve(homeDir, ".local/share/fitness-journal");
+const DEFAULT_CONFIG_PATH = path.resolve(
+  homeDir,
+  ".local/share/fitness-journal",
+);
 
-const DEFAULT_CONFIG_FILE = "config.json";
+export const DEFAULT_CONFIG_FILE = "config.json";
 
 const defaultConfig = {
   journalPath: path.resolve(homeDir, ".local/share/fitness-journal"),
   journalExtension: ".md",
-  workoutOptions: ["Run", "Ride", "Strength", "Flexibility"],
+  workoutOptions: ["run", "bike", "strength", "flexibility"],
 };
 
-export { defaultConfig, defaultConfigPath };
+export { defaultConfig, DEFAULT_CONFIG_PATH };

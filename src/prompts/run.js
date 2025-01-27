@@ -1,5 +1,5 @@
 import { getBasicDistanceDetails } from "./distance.js";
 
-export async function getRunInfo(w) {
-  return await getBasicDistanceDetails(w);
+export async function getRunInfo(workout, options) {
+  return await getBasicDistanceDetails(workout, options);
 }
