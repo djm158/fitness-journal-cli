@@ -24,7 +24,7 @@ export const getWorkouts = async (options: Options = {}) => {
       [workout]: await promptsFor[workout](options.workout, rest),
     };
   }
-  const result = {};
+  const result: { [key in WorkoutType]?: any } = {};
   const workouts = await checkbox<WorkoutType>({
     message: "Workout type?",
     choices: defaultConfig.workoutOptions,
