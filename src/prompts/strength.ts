@@ -36,13 +36,16 @@ export async function getStrengthInfo() {
       { value: "Pistol Squats" },
     ],
   });
-  const strengthExercisesInfo = {};
+
+  // TODO: better types
+  const strengthExercisesInfo: { [key: string]: any } = {};
   for (const exercise of strengthExercises) {
     strengthExercisesInfo[exercise] = await getStrengthExerciseInfo(exercise);
   }
+  return strengthExercisesInfo;
 }
 
-export async function getStrengthExerciseInfo(exercise) {
+export async function getStrengthExerciseInfo(exercise: string) {
   const sets = await input({
     message: `${exercise} Sets?`,
   });
