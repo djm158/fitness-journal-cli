@@ -3,12 +3,12 @@
   "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "src/cli.js",
+  "main": "src/cli.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/cli.js",
     "format": "prettier --write .",
-    "delete-journal": "rm ~/.local/share/fitness-journal/journal.md"
+    "delete-journal": "rm ~/.local/share/fitness-journal/journal.md",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,8 @@
     "commander": "^13.1.0"
   },
   "devDependencies": {
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3",
+    "@types/bun": "latest"
   }
 }

@@ -1,6 +1,7 @@
 import { input } from "@inquirer/prompts";
+import type { Options } from "../types";
 
-export const getTitle = async (options) => {
+export const getTitle = async (options: Options) => {
   if (options.title) {
     return options.title;
   }

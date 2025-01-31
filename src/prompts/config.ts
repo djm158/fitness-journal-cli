@@ -6,7 +6,8 @@ import {
   defaultConfig,
   DEFAULT_CONFIG_PATH,
   DEFAULT_CONFIG_FILE,
-} from "../config.js";
+} from "../config";
+import type { WorkoutType } from "../types";
 
 export const promptForConfig = async () => {
   const journalPath = await input({
@@ -21,13 +22,13 @@ export const promptForConfig = async () => {
 
   const workoutOptions = await input({
     message: "Workout options?",
-    default: defaultConfig.workoutOptions,
+    default: defaultConfig.workoutOptions as unknown as string,
   });
 
   return {
     journalPath,
     journalExtension,
-    workoutOptions,
+    workoutOptions: workoutOptions as unknown as WorkoutType[],
   };
 };
 

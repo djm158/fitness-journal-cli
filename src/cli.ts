@@ -1,10 +1,8 @@
-import { checkForConfig } from "./prompts/config.js";
-import { writeEntry } from "./writeEntry.js";
-
-import { getTitle } from "./prompts/title.js";
 import { Command, Option } from "commander";
-import { getWorkouts } from "./prompts/workouts.js";
-import { defaultConfig } from "./config.js";
+
+import { defaultConfig } from "./config";
+import { getWorkouts, getTitle, checkForConfig } from "./prompts";
+import { writeEntry } from "./writeEntry";
 
 const program = new Command();
 
